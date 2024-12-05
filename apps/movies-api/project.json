@@ -24,6 +24,7 @@
     },
     "build": {
       "defaultConfiguration": "production",
+      "inputs": [{"runtime": "date"}],
       "configurations": {
         "production": {
           "externalDependencies": [
@@ -47,12 +48,12 @@
     },
     "deploy": {
       "executor": "@nx-workshop/internal-plugin:fly-deploy",
+      "inputs": [{ "runtime": "fly version" }],
       "outputs": [],
       "options": {
         "distLocation": "dist/apps/movies-api",
         "flyAppName": "nx-workshop-2024-revc"
-      },
-      "dependsOn": [{ "target": "build", "projects": "self", "params": "forward" }]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
