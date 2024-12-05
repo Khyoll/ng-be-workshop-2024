@@ -16,12 +16,13 @@
   },
   "targetDefaults": {
       "deploy": {
-      "dependsOn": ["build"],
-      "inputs": [
-        "production",
-        "^production",
-        { "externalDependencies": ["nx" ]}
-      ]
+        "cache": true,
+        "dependsOn": ["build"],
+        "inputs": [
+          "production",
+          "^production",
+          { "externalDependencies": ["nx"]}
+        ]
     },
     "@nx/angular:application": {
       "cache": true,
