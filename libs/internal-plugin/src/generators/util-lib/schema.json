@@ -12,7 +12,33 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "name of subdirectory to generate the lib",
+      "x-prompt": {
+        "message": "Where do you want to generate your lib?",
+        "type": "list",
+        "items": [
+          {
+            "value": "movie",
+            "label": "movie"
+          },
+          {
+            "value": "api",
+            "label": "api"
+          },
+          {
+            "value": "shared",
+            "label": "shared"
+          }
+        ]
+      },
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
     }
   },
-  "required": ["name"]
+  "required": ["name", "directory"]
 }
