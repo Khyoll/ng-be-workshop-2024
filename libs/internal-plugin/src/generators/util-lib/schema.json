@@ -16,7 +16,7 @@
     "directory": {
       "type": "string",
       "description": "name of subdirectory to generate the lib",
-      "enum": ["api", "movies", "shared"],
+      "enum": ["api", "toto", "movies", "shared"],
       "x-prompt": {
         "message": "Where do you want to generate your lib?",
         "type": "list",
@@ -25,6 +25,10 @@
             {
               "value": "api",
               "label": "api"
+            },
+            {
+              "value": "toto",
+              "label": "toto"
             },
             {
               "value": "movies",

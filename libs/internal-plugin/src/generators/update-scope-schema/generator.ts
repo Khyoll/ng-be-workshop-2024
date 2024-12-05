@@ -6,13 +6,15 @@ import {
 } from '@nx/devkit';
 import { UpdateScopeSchemaGeneratorSchema } from './schema';
 
+const UTIL_LIB_PATH = '/libs/internal-plugin/src/generators/util-lib'
+
 export async function updateScopeSchemaGenerator(
   tree: Tree,
   options: UpdateScopeSchemaGeneratorSchema
 ) {
 
   const scopes = getAllScopes(tree);
-  updateJson(tree, '/libs/internal-plugin/src/generators/util-lib/schema.json', utilLibSchema => ({
+  updateJson(tree, `${UTIL_LIB_PATH}/schema.json`, utilLibSchema => ({
     ...utilLibSchema,
     properties:{
       ...utilLibSchema.properties,
@@ -32,6 +34,9 @@ export async function updateScopeSchemaGenerator(
     }
   }));
 
+  const utilLibSchemaContent = tree.read(`${UTIL_LIB_PATH}/Schema.d.ts`);
+  tree.write(`${UTIL_LIB_PATH}/Schema.d.ts`, replaceScopes(utilLibSchemaContent.toString(), scopes));
+
   await formatFiles(tree);
 }
 
@@ -50,4 +55,16 @@ function getAllScopes(tree: Tree): string[] {
     .map((scope: string) => scope.slice(6));
 
   return Array.from(new Set(allScopes));
+}
+
+function replaceScopes(content: string, scopes: string[]): string {
+  const joinScopes = scopes.map((s) => `'${s}'`).join(' | ');
+  const PATTERN = /interface UtilLibGeneratorSchema \{\n.*\n.*\n\}/gm;
+  return content.replace(
+    PATTERN,
+    `interface UtilLibGeneratorSchema {
+  name: string;
+  directory: ${joinScopes};
+}`
+  );
 }
