@@ -4,8 +4,8 @@
   "projectType": "application",
   "prefix": "movies",
   "sourceRoot": "apps/movies-app/src",
-  "implicitDependencies": ["shared-ui-theme"],
   "tags": ["scope:movies", "type:app"],
+  "implicitDependencies": ["shared-ui-theme"],
   "targets": {
     "build": {
       "executor": "@nx/angular:application",
@@ -96,6 +96,20 @@
       "options": {
         "buildTarget": "movies-app:build",
         "staticFilePath": "dist/apps/movies-app/browser"
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx surge dist/apps/movies-app/browser ${SURGE_DOMAIN} --token 78753814c5a7a5e947ac306d88b5e751"
+      }
+    },
+    "windows-deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "surge dist/apps/movies-app %SURGE_DOMAIN% --token %SURGE_TOKEN%"
       }
     }
   }
