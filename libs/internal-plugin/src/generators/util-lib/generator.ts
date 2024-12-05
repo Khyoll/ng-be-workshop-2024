@@ -14,7 +14,7 @@ export async function utilLibGenerator(
 ) {
   await libraryGenerator(tree, {
     directory:  options.directory + '/util-' + options.name,
-    tags: 'scope:' + options.directory
+    tags: `scope:${options.directory},type:${options.directory}`
   });
 
   console.log('from generator - ' + options.name);

@@ -1,0 +1,26 @@
+{
+  "name": "util-util-notifications",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "api/util-util-notifications/src",
+  "projectType": "library",
+  "tags": ["scope:api", "type:api"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/api/util-util-notifications",
+        "main": "api/util-util-notifications/src/index.ts",
+        "tsConfig": "api/util-util-notifications/tsconfig.lib.json",
+        "assets": ["api/util-util-notifications/*.md"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "api/util-util-notifications/jest.config.ts"
+      }
+    }
+  }
+}
