@@ -13,11 +13,10 @@ export async function updateScopeSchemaGenerator(
   options: UpdateScopeSchemaGeneratorSchema
 ) {
 
-  updateJson(tree, '/nx.json', config => {
-    config.defaultProject = 'movieApp'
-
-    return config;
-  });
+  updateJson(tree, '/nx.json', config => ({
+    ...config,
+    defaultProject: "movieApp"
+  }));
 
   // const projectRoot = `libs/${options.name}`;
   // addProjectConfiguration(tree, options.name, {
