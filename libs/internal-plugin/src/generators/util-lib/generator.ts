@@ -13,7 +13,8 @@ export async function utilLibGenerator(
   options: UtilLibGeneratorSchema
 ) {
   await libraryGenerator(tree, {
-    directory:  options.directory + '/util-' + options.name
+    directory:  options.directory + '/util-' + options.name,
+    tags: 'scope:' + options.directory
   });
 
   console.log('from generator - ' + options.name);
