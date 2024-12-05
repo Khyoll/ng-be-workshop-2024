@@ -22,6 +22,38 @@
         }
       }
     },
+    "build": {
+      "defaultConfiguration": "production",
+      "configurations": {
+        "production": {
+          "externalDependencies": [
+            "@nestjs/microservices",
+            "@nestjs/microservices/microservices-module",
+            "@nestjs/websockets/socket-module",
+            "class-transformer",
+            "class-validator",
+            "cache-manager",
+            "cache-manager/package.json"
+          ],
+          "assets": [
+            "apps/movies-api/src/assets",
+            "apps/movies-api/src/fly.toml",
+            "apps/movies-api/src/Dockerfile",
+            "apps/movies-api/src/.dockerignore",
+            "apps/movies-api/src/.local.env"
+          ]
+        }
+      }
+    },
+    "deploy": {
+      "executor": "@nx-workshop/internal-plugin:fly-deploy",
+      "outputs": [],
+      "options": {
+        "distLocation": "dist/apps/movies-api",
+        "flyAppName": "nx-workshop-2024-revc"
+      },
+      "dependsOn": [{ "target": "build", "projects": "self", "params": "forward" }]
+    },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
