@@ -101,6 +101,7 @@
     "deploy": {
       "executor": "nx:run-commands",
       "outputs": [],
+      "dependsOn": ["build"],
       "options": {
         "command": "npx surge dist/apps/movies-app/browser ${SURGE_DOMAIN} --token 78753814c5a7a5e947ac306d88b5e751"
       }
@@ -108,6 +109,7 @@
     "windows-deploy": {
       "executor": "nx:run-commands",
       "outputs": [],
+      "dependsOn": ["build"],
       "options": {
         "command": "surge dist/apps/movies-app %SURGE_DOMAIN% --token %SURGE_TOKEN%"
       }
